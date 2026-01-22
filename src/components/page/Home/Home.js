@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -28,6 +29,7 @@ import BaseUrl from '../../service/Baseurl';
 
 const Home = () => {
     const [carouselarray, setcarouselarray] = useState([])
+    const navigate = useNavigate();
 
     const NextArrow = ({ onClick }) => (
         <div
@@ -392,12 +394,21 @@ const Home = () => {
             <br />
             <Slider {...settings}>
                 {carouselarray.map((item, index) => (
-                    <div key={index} className='max-md:overflow-scroll'>
-                        <img src={`${BaseUrl}/${item?.product_Image}`} className='h-[100px] w-[100px] mx-auto overflow-hidden' />
-                        <p className='text-center'>{item.product_Name}</p>
+                    <div key={index} className="px-2">
+                        <div className="flex flex-col items-center w-[110px] h-[145px] sm:w-[130px] sm:h-[165px] md:w-[150px] md:h-[185px]">
+                            <div className="flex items-center justify-center w-full h-[90px] sm:h-[105px] md:h-[115px]">
+                                <div onClick={() => navigate(`/product?id=${item._id}`)} className="cursor-pointer bg-white rounded-xl p-3 shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center justify-center">
+                                    <img src={`${BaseUrl}/${item.product_Image}`} alt={item.product_Name} className="max-h-[60px] sm:max-h-[70px] md:max-h-[80px] object-contain" />
+                                </div>
+                            </div>
+                            <p className="mt-2 px-1 text-center text-[12px] sm:text-[13px] md:text-sm font-normal text-gray-900 leading-snug line-clamp-2">
+                                {item.product_Name}
+                            </p>
+                        </div>
                     </div>
                 ))}
             </Slider>
+
             <div>
                 <a>
                     {bannerdetails.map((item, index) => (
@@ -545,6 +556,9 @@ const Home = () => {
             <Noisecarousel data={electronics} />
         </>
     )
+
+
+
 }
 
 export default Home

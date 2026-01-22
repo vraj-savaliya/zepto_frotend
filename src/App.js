@@ -8,17 +8,19 @@ import Profile from './components/Profile/Profile';
 import Orders from './components/page/Order';
 import CategoryPage from './components/page/CategoryPage';
 import { Toaster } from 'react-hot-toast';
+import ProductDetail from './components/page/ProductDetail';
 
 function App() {
   return (
     <>
-    <Toaster position="top-right" reverseOrder={false} />
+      <Toaster position="top-right" reverseOrder={false} />
       <Navigation>
         <Routes>
           <Route path={'/'} element={<Home />} />
-          <Route path={'/profile' }element={<Profile />} />
-          <Route path={'/Orders' }element={<Orders />} />
+          <Route path={'/profile'} element={<Profile />} />
+          <Route path={'/Orders'} element={<Orders />} />
           <Route path="/category/:id" element={<CategoryPage />} />
+          <Route path="/product" element={<ProductDetail />} />
         </Routes>
       </Navigation>
     </>
